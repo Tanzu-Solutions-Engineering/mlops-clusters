@@ -1,0 +1,32 @@
+#ENC[AES256_GCM,data:PlEFWxvLwqqhKxqegJxSSzzS5FruO5jKLY9S34ITbK5msWWhYh2p0735ADctkyc7Va9LMSLkAg==,iv:wCz6fWrvQSMbPffgluQpVOHFfGXWTltXn8h4KNwyqXw=,tag:Vz3DCSvBEHgP+tWG8HcCqg==,type:comment]
+secrets:
+    sops:
+        age_key: ENC[AES256_GCM,data:BymEfh+pypXW5HowHB9MY2AKMjY+tzgSeiRoIZ9ll8t5uwm7qkpte4ybCxGuiranigU8BHnVUA3G494N7ujOMDCEUbg6D85QRlPNK+oFK6iivSWP9XfEDzLEjtGTUKsBZDFyuQ4d/HIowCUnO5f45K2zWHSeEXmIjN8XjR2wQrTwtuo=,iv:Xwu4uU6/aT1MEaEzN8Wcx7XWaPacuGKWkgDiAA5se0c=,tag:UuxrlV9UZa0ePSvPw2imPg==,type:str]
+        registry:
+            hostname: ENC[AES256_GCM,data:r1MgbBQq5BarMLtt5S0KqAykQt5qib/8XQ==,iv:XEH5U3or57v5fNNlMxYDVoIob7tgWEEXgkwoenA25c8=,tag:uEdAB9ZtEjWPoMz4vpfkxg==,type:str]
+            username: ENC[AES256_GCM,data:il/T1GIYU/Dh1ED3vmkwIGY=,iv:TvgvDAWq63/wGVRHEVPmm0LTjmsWQo0A6d/DrWt2Qbw=,tag:Ymv5igGcXEolswAZijn+JQ==,type:str]
+            password: ENC[AES256_GCM,data:/QRBwne7ueY=,iv:BbXDKq+FA9hwEayULwH5df26JSXD2tk023V7Kj68dNg=,tag:v9gFM02s4NZLM2DCFNMblg==,type:str]
+        git:
+            basic_auth:
+                username: ENC[AES256_GCM,data:caOk7APuOat4003lwQ==,iv:Ng16A6VRC4LcxJcldpSgqmaEEfRTko8Q3P0c/PMsTSw=,tag:1Cj91pj9GmC80KFWhIfGSA==,type:str]
+                password: ENC[AES256_GCM,data:97pNqzy9llh69t5ANTxw380pAIrZoHk0eoJ2jWHv+uL5RoCnwDoa0g==,iv:T7ITJq7/5bqfz819tz3iPigltY8uGRVaoQGX+0FbYOU=,tag:3iVXUvSk6WtrbENPv495RA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1hp9cwcus5xvzwu94pjv3zhcv8gyadagr8y2vnwwrpv4tsswcmanq070gp2
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMVjE2bEg0ZlJKeHgvOEc3
+            OWtERHNCd0VoRzZCTW1QSkZVMU90K1ljR1FNCnRrL291ckpQbmpGQVc1ZENGczJl
+            TFJuSU1aUENCN2tsSFdBRWtnajArM0kKLS0tIFJiY25CNlFYWFYzMTZLUmxnaWlK
+            TndQdndkK0VjMS96NHVkV1Bib3ZVb00KIL3H5b0vgI5ZoNObRkkUA9Dw17wrZA46
+            UIXAWI+Dq60P/NcMU55F2Jf1qTRsrr6zTeBecMDaskuxWmhQaXBfoA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-08-25T21:11:56Z"
+    mac: ENC[AES256_GCM,data:GIg7NCsxE5LzYPR7Yp6/usDSeBcLRnGdqK0KV/dss8F60sertqJ55jmwc30xEGptM04bsDwxRPLjaq8AA4J7U19O4MLIl5R11nuosU1c/h2xaOi3zZHE50kjs1O7IgNGHrOeXqBT7hCe6zePm0BIl75unA5httKjEeImFhyldJk=,iv:GYSxJ/YJtiywIFe4Fh5tcos+oUXlAVrmg40LKbhkwXE=,tag:CoC2nTujED5PKKMuXz+HTQ==,type:str]
+    pgp: []
+    unencrypted_suffix: _unencrypted
+    version: 3.7.3
