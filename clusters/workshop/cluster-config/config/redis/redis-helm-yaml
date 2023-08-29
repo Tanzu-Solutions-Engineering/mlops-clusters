@@ -8,7 +8,7 @@ apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
   name: redis
-  namespace: default
+  namespace: redis
 spec:
   serviceAccountName: default
   fetch:
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: redis-values
-  namespace: default
+  namespace: redis
 stringData:
   data.yml: |
     password: "1234567891234"
