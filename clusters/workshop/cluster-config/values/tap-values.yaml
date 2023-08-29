@@ -58,7 +58,7 @@ tap_install:
       gitops_install:
         ref: origin/main
         subPath: clusters/workshop/cluster-config/namespace-provisioner/namespaces
-        url: https://github.com/cpage-pivotal/workshop-clusters.git
+        url: https://github.com/Tanzu-Solutions-Engineering/mlops-clusters
         secretRef:
           name: sync-git
           namespace: tanzu-sync
@@ -66,7 +66,7 @@ tap_install:
       additional_sources:
         # additional sources points to the resources we want to fill those namespaces with
         - git:
-            url: https://github.com/cpage-pivotal/workshop-clusters.git
+            url: https://github.com/Tanzu-Solutions-Engineering/mlops-clusters
             ref: origin/main
             subPath: clusters/workshop/cluster-config/namespace-provisioner/namespace-resources
             secretRef:

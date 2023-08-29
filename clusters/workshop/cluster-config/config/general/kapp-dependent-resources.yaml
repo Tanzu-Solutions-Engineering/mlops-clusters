@@ -11,7 +11,7 @@ spec:
   fetch:
     - git:
         ref: origin/main
-        url: https://github.com/cpage-pivotal/workshop-clusters
+        url: https://github.com/Tanzu-Solutions-Engineering/mlops-clusters
         subPath: clusters/workshop/cluster-config/dependent-resources
         secretRef:
           name: sync-git
