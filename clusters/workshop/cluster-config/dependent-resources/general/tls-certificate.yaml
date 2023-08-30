@@ -8,6 +8,7 @@ apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
   name: argo
+  namespace: argo
 spec:
   virtualhost:
     fqdn: argo.mlops.tanzu.corby.page
