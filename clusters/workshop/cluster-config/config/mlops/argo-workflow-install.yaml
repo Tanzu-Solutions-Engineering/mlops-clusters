@@ -1276,7 +1276,7 @@ spec:
     spec:
       containers:
         - args:
-            - --auth-mode=server
+            - server
           env: []
           image: quay.io/argoproj/argocli:v3.4.10
           name: argo-server
