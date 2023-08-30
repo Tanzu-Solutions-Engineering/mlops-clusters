@@ -1276,6 +1276,7 @@ spec:
     spec:
       containers:
         - args:
+            - --secure=false
             - server
             - --auth-mode=server
           env: []
