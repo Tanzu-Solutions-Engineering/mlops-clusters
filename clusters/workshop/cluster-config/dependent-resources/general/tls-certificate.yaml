@@ -4,6 +4,22 @@ kind: Namespace
 metadata:
   name: contour-tls
 ---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: argo
+spec:
+  virtualhost:
+    fqdn: argo.mlops.tanzu.corby.page
+    tls:
+      secretName: contour-tls/tls
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: argo-server
+          port: 2746
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
