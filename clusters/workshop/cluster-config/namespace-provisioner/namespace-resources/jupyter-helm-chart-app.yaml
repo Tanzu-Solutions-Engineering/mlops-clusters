@@ -20,7 +20,7 @@ spec:
   deploy:
     - kapp:
         delete:
-          # Force delete PVCs, since StatefulSet does not delete them
+          #! Force delete PVCs, since StatefulSet does not delete them
           rawOptions: ["--apply-ignored=true"]
 ---
 apiVersion: v1
