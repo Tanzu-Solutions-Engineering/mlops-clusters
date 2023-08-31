@@ -18,6 +18,19 @@ spec:
         valuesFrom:
           - secretRef:
               name: jupyter-values
+    - ytt:
+        inline:
+          paths:
+            dir/file.ext: |
+              apiVersion: kapp.k14s.io/v1alpha1
+              kind: Config
+              rebaseRules:
+              - path: [spec, replicas]
+                type: copy
+                sources: [new, existing]
+                resourceMatchers:
+                - apiVersionKindMatcher: {apiVersion: apps/v1, kind: Deployment}
+
   deploy:
     - kapp:
         delete:
