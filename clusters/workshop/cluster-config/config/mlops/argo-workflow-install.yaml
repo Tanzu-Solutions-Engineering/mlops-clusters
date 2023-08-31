@@ -1240,6 +1240,8 @@ kind: ConfigMap
 metadata:
   name: workflow-controller-configmap
   namespace: argo
+data:
+  kubeletInsecure: "false"
 ---
 apiVersion: v1
 kind: Service
@@ -1276,8 +1278,8 @@ spec:
     spec:
       containers:
         - args:
-            - --secure=false
             - server
+            - --secure=false
             - --auth-mode=server
           env: []
           image: quay.io/argoproj/argocli:v3.4.10
