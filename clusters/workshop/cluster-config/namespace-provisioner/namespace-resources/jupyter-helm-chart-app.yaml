@@ -21,7 +21,7 @@ spec:
     - ytt:
         inline:
           paths:
-            dir/file.ext: |
+            kapp-config.yaml: |
               apiVersion: kapp.k14s.io/v1alpha1
               kind: Config
               rebaseRules:
