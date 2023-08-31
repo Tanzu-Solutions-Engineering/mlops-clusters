@@ -1240,8 +1240,6 @@ kind: ConfigMap
 metadata:
   name: workflow-controller-configmap
   namespace: argo
-data:
-  kubeletInsecure: "false"
 ---
 apiVersion: v1
 kind: Service
@@ -1291,7 +1289,7 @@ spec:
             httpGet:
               path: /
               port: 2746
-              scheme: HTTPS
+              scheme: HTTP
             initialDelaySeconds: 10
             periodSeconds: 20
           securityContext:
