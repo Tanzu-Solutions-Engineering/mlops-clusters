@@ -15,10 +15,6 @@ spec:
   template:
     - helmTemplate:
         valuesFrom:
-          - downwardAPI:
-              items:
-                - name: kubeVersion
-                  kubernetesVersion: { }
           - secretRef:
               name: jupyter-values
   deploy:
