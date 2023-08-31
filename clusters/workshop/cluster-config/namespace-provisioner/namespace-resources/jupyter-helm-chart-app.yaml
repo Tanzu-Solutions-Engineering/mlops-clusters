@@ -1,0 +1,13 @@
+#@ load(“@ytt:data”, “data”)
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jupyter-values
+stringData:
+  proxy.service.type: "ClusterIP"
+  garbage.value: #@ data.values.name
+
+
+
