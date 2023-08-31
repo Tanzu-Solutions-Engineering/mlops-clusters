@@ -29,7 +29,9 @@ metadata:
   name: jupyter-values
 stringData:
   data.yml: |
-    proxy.service.type: "ClusterIP"
+    proxy:
+      service:
+        type: "ClusterIP"
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
