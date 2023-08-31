@@ -14,6 +14,7 @@ spec:
           url: https://hub.jupyter.org/helm-chart/
   template:
     - helmTemplate:
+        kubernetesVersion: {}
         valuesFrom:
           - secretRef:
               name: jupyter-values
