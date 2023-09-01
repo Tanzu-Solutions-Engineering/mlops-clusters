@@ -17,10 +17,10 @@ stringData:
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
-  annotations:
-    kapp.k14s.io/change-group: secrets
 metadata:
   name: jupyterhub-secret-values
+  annotations:
+    kapp.k14s.io/change-group: secrets
 spec:
   fromNamespace: tanzu-sync
 ---
@@ -103,7 +103,6 @@ spec:
               metadata:
                 annotations:
                   kapp.k14s.io/versioned: ""
-
   deploy:
     - kapp:
         delete:
