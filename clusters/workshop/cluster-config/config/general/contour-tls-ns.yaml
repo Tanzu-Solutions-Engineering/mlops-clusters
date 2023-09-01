@@ -1,0 +1,6 @@
+#! Forward creating the contour-tls ns so we can add the CloudDNS creds
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: contour-tls
