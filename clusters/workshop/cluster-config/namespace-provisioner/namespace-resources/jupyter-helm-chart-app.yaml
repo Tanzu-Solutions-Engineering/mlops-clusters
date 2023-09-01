@@ -3,58 +3,21 @@
 apiVersion: secretgen.k14s.io/v1alpha1
 kind: Password
 metadata:
-  name: configurable-http-proxy
-spec:
-  length: 64
----
-apiVersion: secretgen.k14s.io/v1alpha1
-kind: Password
-metadata:
-  name: cryptkeeper
-spec:
-  length: 64
----
-apiVersion: secretgen.k14s.io/v1alpha1
-kind: Password
-metadata:
-  name: jupyterhub
-spec:
-  length: 64
----
-apiVersion: secretgen.carvel.dev/v1alpha1
-kind: SecretTemplate
-metadata:
   name: jupyterhub-secret-values
-  annotations:
-    kapp.k14s.io/change-group: secrets
 spec:
-  inputResources:
-  - name: configurable-http-proxy
-    ref:
-      apiVersion: v1
-      kind: Secret
-      name: configurable-http-proxy
-  - name: cryptkeeper
-    ref:
-      apiVersion: v1
-      kind: Secret
-      name: cryptkeeper
-  - name: jupyterhub
-    ref:
-      apiVersion: v1
-      kind: Secret
-      name: jupyterhub
-  template:
+  length: 64
+  secretTemplate:
+    type: Opaque
     stringData:
-      secrets.yaml: |
+      secret.yaml: |
         hub:
           config:
             ConfigurableHTTPProxy:
-              auth_token: $(.configurable-http-proxy.data.password)
+              auth_token: $(value)
             CryptKeeper:
-              keys: $(.cryptkeeper.data.password)
+              keys: $(value)
             JupyterHub:
-              cookie_secret: $(.jupyterhub.data.password)
+              cookie_secret: $(value)
 ---
 apiVersion: v1
 kind: Secret
