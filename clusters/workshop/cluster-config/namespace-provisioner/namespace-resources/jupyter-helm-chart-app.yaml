@@ -15,6 +15,15 @@ stringData:
       userScheduler:
         enabled: false
 ---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+  annotations:
+    kapp.k14s.io/change-group: secrets
+metadata:
+  name: jupyterhub-secret-values
+spec:
+  fromNamespace: tanzu-sync
+---
 apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
@@ -37,8 +46,8 @@ spec:
         valuesFrom:
           - secretRef:
               name: jupyter-values
-#!          - secretRef:
-#!              name: jupyterhub-secret-values
+          - secretRef:
+              name: jupyterhub-secret-values
     - ytt:
         inline:
           paths:
