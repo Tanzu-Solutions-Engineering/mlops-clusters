@@ -45,7 +45,7 @@ spec:
       kind: Secret
       name: jupyterhub
   template:
-    data:
+    stringData:
       secrets.yaml: |
         hub:
           config:
