@@ -5,7 +5,7 @@ kind: Password
 metadata:
   name: jupyterhub-secret-values
 spec:
-  length: 64
+  length: 32
   secretTemplate:
     type: Opaque
     stringData:
