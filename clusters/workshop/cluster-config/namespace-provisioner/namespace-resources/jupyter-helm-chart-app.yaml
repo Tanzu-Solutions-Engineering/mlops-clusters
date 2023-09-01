@@ -1,49 +1,67 @@
 #@ load("@ytt:data", "data")
 ---
-apiVersion: kappctrl.k14s.io/v1alpha1
-kind: App
+apiVersion: secretgen.k14s.io/v1alpha1
+kind: Password
+metadata:
+  name: configurable-http-proxy
+spec:
+  length: 64
+---
+apiVersion: secretgen.k14s.io/v1alpha1
+kind: Password
+metadata:
+  name: cryptkeeper
+spec:
+  length: 64
+---
+apiVersion: secretgen.k14s.io/v1alpha1
+kind: Password
 metadata:
   name: jupyterhub
 spec:
-  serviceAccountName: jupyterhub-helm-sa
-  fetch:
-    - helmChart:
-        name: jupyterhub
-        version: "3.0.3"
-        repository:
-          url: https://hub.jupyter.org/helm-chart/
+  length: 64
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretTemplate
+metadata:
+  name: jupyterhub-secret-values
+  annotations:
+    kapp.k14s.io/change-group: secrets
+spec:
+  inputResources:
+  - name: configurable-http-proxy
+    ref:
+      apiVersion: v1
+      kind: Secret
+      name: password
+  - name: cryptkeeper
+    ref:
+      apiVersion: v1
+      kind: Secret
+      name: password
+  - name: jupyterhub
+    ref:
+      apiVersion: v1
+      kind: Secret
+      name: password
   template:
-    - helmTemplate:
-        kubernetesVersion: {}
-        valuesFrom:
-          - secretRef:
-              name: jupyter-values
-    - ytt:
-        inline:
-          paths:
-            #@yaml/text-templated-strings
-            kapp-config.yaml: |
-              ---
-              apiVersion: kapp.k14s.io/v1alpha1
-              kind: Config
-              rebaseRules:
-              - path: [spec, replicas]
-                type: copy
-                sources: [new, existing]
-                resourceMatchers:
-                - kindNamespaceNameMatcher: {kind: Deployment, namespace: (@= data.values.name @), name: hub}
-                - kindNamespaceNameMatcher: {kind: Deployment, namespace: (@= data.values.name @), name: proxy}
-
-  deploy:
-    - kapp:
-        delete:
-          #! Force delete PVCs, since StatefulSet does not delete them
-          rawOptions: ["--apply-ignored=true"]
+    data:
+      secrets.yaml: |
+        hub:
+          config:
+            ConfigurableHTTPProxy:
+              auth_token: $(.configurable-http-proxy.data.password)
+            CryptKeeper:
+              keys: $(.cryptkeeper.data.password)
+            JupyterHub:
+              cookie_secret: $(.jupyterhub.data.password)
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: jupyter-values
+  annotations:
+    kapp.k14s.io/change-group: secrets
 stringData:
   data.yml: |
     proxy:
@@ -52,6 +70,86 @@ stringData:
     scheduling:
       userScheduler:
         enabled: false
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: jupyterhub
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting secrets"
+    kapp.k14s.io/change-rule.1: "delete before deleting secrets"
+spec:
+  serviceAccountName: jupyterhub-helm-sa
+  fetch:
+    - helmChart:
+        name: jupyterhub
+        version: "3.0.3"
+        repository:
+          url: https://hub.jupyter.org/helm-chart/
+
+  template:
+    - helmTemplate:
+        kubernetesVersion: {}
+        valuesFrom:
+          - secretRef:
+              name: jupyter-values
+          - secretRef:
+              name: jupyterhub-secret-values
+    - ytt:
+        inline:
+          paths:
+            config.yaml: |
+              ---
+              apiVersion: kapp.k14s.io/v1alpha1
+              kind: Config
+              rebaseRules:
+              - paths:
+                - [metadata, annotations, volume.kubernetes.io/selected-node]
+                - [metadata, annotations, volume.kubernetes.io/storage-provisioner]
+                type: copy
+                sources: [new, existing]
+                resourceMatchers:
+                - apiGroupKindMatcher: {apiGroup: "", kind: PersistentVolumeClaim}            
+            overlay.yaml: |
+              #@ load("@ytt:overlay", "overlay")
+              
+              #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "hub"}}), expects=1
+              ---
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      #@overlay/remove
+                      checksum/config-map: ""
+                      #@overlay/remove
+                      checksum/secret: ""
+
+              #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "proxy"}}), expects=1
+              ---
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      #@overlay/remove
+                      checksum/auth-token: ""
+                      #@overlay/remove
+                      checksum/proxy-secret: ""
+
+              #@overlay/match by=overlay.subset({"kind": "Secret", "metadata": {"name": "hub"}}), expects=1
+              ---
+              annotations:
+                kapp.k14s.io/versioned: ""
+
+              #@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "hub"}}), expects=1
+              ---
+              annotations:
+                kapp.k14s.io/versioned: ""
+
+  deploy:
+    - kapp:
+        delete:
+          #! Force delete PVCs, since StatefulSet does not delete them
+          rawOptions: ["--apply-ignored=true"]
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
