@@ -1,24 +1,5 @@
 #@ load("@ytt:data", "data")
 ---
-apiVersion: secretgen.k14s.io/v1alpha1
-kind: Password
-metadata:
-  name: jupyterhub-secret-values
-spec:
-  length: 32
-  secretTemplate:
-    type: Opaque
-    stringData:
-      secret.yaml: |
-        hub:
-          config:
-            ConfigurableHTTPProxy:
-              auth_token: $(value)
-            CryptKeeper:
-              keys: $(value)
-            JupyterHub:
-              cookie_secret: $(value)
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -56,8 +37,8 @@ spec:
         valuesFrom:
           - secretRef:
               name: jupyter-values
-          - secretRef:
-              name: jupyterhub-secret-values
+#!          - secretRef:
+#!              name: jupyterhub-secret-values
     - ytt:
         inline:
           paths:
