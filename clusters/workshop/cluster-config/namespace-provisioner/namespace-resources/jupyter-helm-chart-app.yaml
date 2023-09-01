@@ -21,6 +21,7 @@ spec:
     - ytt:
         inline:
           paths:
+            #@yaml/text-templated-strings
             kapp-config.yaml: |
               apiVersion: kapp.k14s.io/v1alpha1
               kind: Config
@@ -29,7 +30,8 @@ spec:
                 type: copy
                 sources: [new, existing]
                 resourceMatchers:
-                - apiVersionKindMatcher: {apiVersion: apps/v1, kind: Deployment}
+                - kindNamespaceNameMatcher: {kind: Deployment, namespace: (@= data.values.name @), name: hub}
+                - kindNamespaceNameMatcher: {kind: Deployment, namespace: (@= data.values.name @), name: proxy}
 
   deploy:
     - kapp:
