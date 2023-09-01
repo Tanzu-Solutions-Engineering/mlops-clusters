@@ -112,7 +112,7 @@ spec:
                 - apiGroupKindMatcher: {apiGroup: "", kind: PersistentVolumeClaim}            
             overlay.yaml: |
               #@ load("@ytt:overlay", "overlay")
-              
+
               #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "hub"}}), expects=1
               ---
               spec:
@@ -137,13 +137,19 @@ spec:
 
               #@overlay/match by=overlay.subset({"kind": "Secret", "metadata": {"name": "hub"}}), expects=1
               ---
-              annotations:
-                kapp.k14s.io/versioned: ""
+              #@overlay/match missing_ok=True
+              #@overlay/match-child-defaults missing_ok=True
+              metadata:
+                annotations:
+                  kapp.k14s.io/versioned: ""
 
               #@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "hub"}}), expects=1
               ---
-              annotations:
-                kapp.k14s.io/versioned: ""
+              #@overlay/match missing_ok=True
+              #@overlay/match-child-defaults missing_ok=True
+              metadata:
+                annotations:
+                  kapp.k14s.io/versioned: ""
 
   deploy:
     - kapp:
