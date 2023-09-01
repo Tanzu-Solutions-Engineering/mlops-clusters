@@ -5,7 +5,7 @@ metadata:
   name: flux-helm-controller
   namespace: tap-install
 spec:
-  serviceAccountName: tanzu-cd
+  serviceAccountName: tap-installer-sa
   packageRef:
     refName: fluxcd-helm-controller.tanzu.vmware.com
     versionSelection:
