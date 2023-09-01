@@ -33,17 +33,17 @@ spec:
     ref:
       apiVersion: v1
       kind: Secret
-      name: password
+      name: configurable-http-proxy
   - name: cryptkeeper
     ref:
       apiVersion: v1
       kind: Secret
-      name: password
+      name: cryptkeeper
   - name: jupyterhub
     ref:
       apiVersion: v1
       kind: Secret
-      name: password
+      name: jupyterhub
   template:
     data:
       secrets.yaml: |
