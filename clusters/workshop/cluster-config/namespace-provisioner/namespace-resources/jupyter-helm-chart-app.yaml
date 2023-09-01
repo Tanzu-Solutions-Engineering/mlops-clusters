@@ -1,113 +1,26 @@
 #@ load("@ytt:data", "data")
 ---
-apiVersion: v1
-kind: Secret
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
-  name: jupyter-values
-  annotations:
-    kapp.k14s.io/change-group: secrets
-stringData:
-  data.yml: |
+  name: jupyterhub
+spec:
+  chart:
+    spec:
+      chart: jupyterhub
+      sourceRef:
+        kind: HelmRepository
+        name: jupyterhub
+        namespace: tap-install
+      version: "3.0.3"
+  interval: 1m0s
+  values:
     proxy:
       service:
         type: "ClusterIP"
     scheduling:
       userScheduler:
         enabled: false
----
-apiVersion: secretgen.carvel.dev/v1alpha1
-kind: SecretImport
-metadata:
-  name: jupyterhub-secret-values
-  annotations:
-    kapp.k14s.io/change-group: secrets
-spec:
-  fromNamespace: tanzu-sync
----
-apiVersion: kappctrl.k14s.io/v1alpha1
-kind: App
-metadata:
-  name: jupyterhub
-  annotations:
-    kapp.k14s.io/change-rule.0: "upsert after upserting secrets"
-    kapp.k14s.io/change-rule.1: "delete before deleting secrets"
-spec:
-  serviceAccountName: jupyterhub-helm-sa
-  fetch:
-    - helmChart:
-        name: jupyterhub
-        version: "3.0.3"
-        repository:
-          url: https://hub.jupyter.org/helm-chart/
-
-  template:
-    - helmTemplate:
-        kubernetesVersion: {}
-        valuesFrom:
-          - secretRef:
-              name: jupyter-values
-          - secretRef:
-              name: jupyterhub-secret-values
-    - ytt:
-        inline:
-          paths:
-            config.yaml: |
-              ---
-              apiVersion: kapp.k14s.io/v1alpha1
-              kind: Config
-              rebaseRules:
-              - paths:
-                - [metadata, annotations, volume.kubernetes.io/selected-node]
-                - [metadata, annotations, volume.kubernetes.io/storage-provisioner]
-                type: copy
-                sources: [new, existing]
-                resourceMatchers:
-                - apiGroupKindMatcher: {apiGroup: "", kind: PersistentVolumeClaim}            
-            overlay.yaml: |
-              #@ load("@ytt:overlay", "overlay")
-
-              #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "hub"}}), expects=1
-              ---
-              spec:
-                template:
-                  metadata:
-                    annotations:
-                      #@overlay/remove
-                      checksum/config-map: ""
-                      #@overlay/remove
-                      checksum/secret: ""
-
-              #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "proxy"}}), expects=1
-              ---
-              spec:
-                template:
-                  metadata:
-                    annotations:
-                      #@overlay/remove
-                      checksum/auth-token: ""
-                      #@overlay/remove
-                      checksum/proxy-secret: ""
-
-              #@overlay/match by=overlay.subset({"kind": "Secret", "metadata": {"name": "hub"}}), expects=1
-              ---
-              #@overlay/match missing_ok=True
-              #@overlay/match-child-defaults missing_ok=True
-              metadata:
-                annotations:
-                  kapp.k14s.io/versioned: ""
-
-              #@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "hub"}}), expects=1
-              ---
-              #@overlay/match missing_ok=True
-              #@overlay/match-child-defaults missing_ok=True
-              metadata:
-                annotations:
-                  kapp.k14s.io/versioned: ""
-  deploy:
-    - kapp:
-        delete:
-          #! Force delete PVCs, since StatefulSet does not delete them
-          rawOptions: ["--apply-ignored=true"]
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
@@ -124,22 +37,3 @@ spec:
       services:
         - name: proxy-public
           port: 80
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: jupyterhub-helm-sa
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: jupyterhub-helm-rb
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: jupyterhub-helm-sa
-
-

@@ -1,0 +1,14 @@
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: external-dns
+  namespace: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-group: "helm-controller"
+spec:
+  serviceAccountName: tanzu-cd
+  packageRef:
+    refName: fluxcd.source.controller.tanzu.vmware.com
+    versionSelection:
+      constraints: 0.36.1+tanzu.1
