@@ -31,8 +31,12 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: contour
+  tls:
+    - hosts:
+        - jupyter.mlops.tanzu.corby.page
+      secretName: tls
   rules:
-    - host: "jupyter.mlops.tanzu.corby.page"
+    - host: jupyter.mlops.tanzu.corby.page
       http:
         paths:
           - path: /
