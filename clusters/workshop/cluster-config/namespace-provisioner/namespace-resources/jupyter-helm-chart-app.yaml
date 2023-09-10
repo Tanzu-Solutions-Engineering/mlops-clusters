@@ -18,9 +18,9 @@ spec:
     proxy:
       service:
         type: "ClusterIP"
-    scheduling:
-      userScheduler:
-        enabled: false
+#    scheduling:
+#      userScheduler:
+#        enabled: false
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
