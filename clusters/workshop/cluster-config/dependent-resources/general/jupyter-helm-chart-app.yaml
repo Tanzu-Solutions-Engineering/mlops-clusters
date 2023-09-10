@@ -30,7 +30,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
+  ingressClassName: contour
   rules:
     - host: "jupyter.mlops.tanzu.corby.page"
       http:
