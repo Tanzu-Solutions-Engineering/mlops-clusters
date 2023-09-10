@@ -22,17 +22,22 @@ spec:
       service:
         type: "ClusterIP"
 ---
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: jupyter
-  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  virtualhost:
-      fqdn: j-test.mlops.tanzu.corby.page
-  routes:
-    - conditions:
-        - prefix: /
-      services:
-        - name: proxy-public
-          port: 80
+  ingressClassName: nginx
+  rules:
+    - host: "jupyter.mlops.tanzu.corby.page"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-public
+                port:
+                  number: 80
