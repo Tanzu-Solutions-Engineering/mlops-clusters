@@ -28,3 +28,19 @@ spec:
         namespace: tap-install
       version: "0.0.18"
   interval: 1m0s
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: datahub
+  namespace: datahub
+spec:
+  chart:
+    spec:
+      chart: datahub
+      sourceRef:
+        kind: HelmRepository
+        name: datahub
+        namespace: tap-install
+      version: "0.2.185"
+  interval: 1m0s
