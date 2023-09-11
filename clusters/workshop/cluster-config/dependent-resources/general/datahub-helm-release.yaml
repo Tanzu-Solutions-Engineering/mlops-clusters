@@ -51,3 +51,20 @@ spec:
     datahub-gms:
       service:
         type: ClusterIP
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: datahub
+  namespace: datahub
+spec:
+  virtualhost:
+    fqdn: datahub.mlops.tanzu.corby.page
+    tls:
+      secretName: contour-tls/tls
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: datahub-datahub-frontend
+          port: 9002
