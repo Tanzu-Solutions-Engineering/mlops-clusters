@@ -12,7 +12,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: minio-operator
+      chart: operator
       sourceRef:
         kind: HelmRepository
         name: minio
