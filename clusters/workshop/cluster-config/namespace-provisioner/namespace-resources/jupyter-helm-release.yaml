@@ -41,11 +41,11 @@ spec:
         - prefix: /user/jupyter/api/events/subscribe
       enableWebsockets: true
       services:
-        - name: proxy-api
-          port: 8001
+        - name: proxy-public
+          port: 80
     - conditions:
         - prefix: /user/jupyter/api/kernels
       enableWebsockets: true
       services:
-        - name: proxy-api
-          port: 8001
+        - name: proxy-public
+          port: 80
