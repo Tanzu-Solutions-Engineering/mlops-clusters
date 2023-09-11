@@ -38,7 +38,7 @@ spec:
         - name: proxy-public
           port: 80
     - conditions:
-        - prefix: /user/jupyter/api
+        - prefix: /user/jupyter/api/events/subscribe
       enableWebsockets: true
       services:
         - name: proxy-api
