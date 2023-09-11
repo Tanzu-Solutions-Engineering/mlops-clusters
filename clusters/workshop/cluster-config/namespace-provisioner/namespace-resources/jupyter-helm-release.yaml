@@ -43,3 +43,9 @@ spec:
       services:
         - name: proxy-api
           port: 8001
+    - conditions:
+        - prefix: /user/jupyter/api/kernels
+      enableWebsockets: true
+      services:
+        - name: proxy-api
+          port: 8001
