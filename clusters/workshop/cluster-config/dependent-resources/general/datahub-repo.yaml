@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: datahub
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/change-group: datahub-helm-repo
+spec:
+  interval: 5m0s
+  url: https://helm.datahubproject.io/
