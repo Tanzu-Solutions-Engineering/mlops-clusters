@@ -13,18 +13,18 @@ metadata:
   namespace: datahub
 type: Opaque
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: datahub-prerequisites
-  namespace: datahub
-spec:
-  chart:
-    spec:
-      chart: datahub-prerequisites
-      sourceRef:
-        kind: HelmRepository
-        name: datahub
-        namespace: tap-install
-      version: "0.0.18"
-  interval: 1m0s
+#apiVersion: helm.toolkit.fluxcd.io/v2beta1
+#kind: HelmRelease
+#metadata:
+#  name: prerequisites
+#  namespace: datahub
+#spec:
+#  chart:
+#    spec:
+#      chart: datahub-prerequisites
+#      sourceRef:
+#        kind: HelmRepository
+#        name: datahub
+#        namespace: tap-install
+#      version: "0.0.18"
+#  interval: 1m0s
