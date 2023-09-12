@@ -104,6 +104,7 @@ spec:
   routes:
     - conditions:
         - prefix: /
+      permitInsecure: true
       services:
         - name: mlops-tenant-console
           port: 9443
