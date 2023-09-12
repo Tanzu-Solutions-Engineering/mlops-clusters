@@ -99,8 +99,8 @@ metadata:
 spec:
   virtualhost:
     fqdn: minio.mlops.tanzu.corby.page
-    tls:
-      secretName: contour-tls/tls
+#    tls:
+#      secretName: contour-tls/tls
   routes:
     - conditions:
         - prefix: /
