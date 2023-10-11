@@ -29,10 +29,6 @@ tap_install:
       app_service_type: ClusterIP
       ns_for_export_app_cert: "*"
 
-    scanning:
-      metadataStore:
-        url: ""
-
     grype:
       targetImagePullSecret: registry-credentials
 
