@@ -45,6 +45,7 @@ spec:
       version: "0.2.185"
   interval: 1m0s
   values:
+    # See https://raw.githubusercontent.com/acryldata/datahub-helm/master/charts/datahub/values.yaml
     datahub-frontend:
       service:
         type: ClusterIP

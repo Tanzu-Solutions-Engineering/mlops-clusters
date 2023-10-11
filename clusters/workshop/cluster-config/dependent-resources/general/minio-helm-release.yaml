@@ -19,6 +19,7 @@ spec:
         namespace: tap-install
       version: "5.0.8"
   interval: 1m0s
+  # See https://raw.githubusercontent.com/minio/operator/master/helm/operator/values.yaml
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -36,6 +37,7 @@ spec:
       version: "5.0.8"
   interval: 1m0s
   values:
+    # See https://raw.githubusercontent.com/minio/operator/master/helm/tenant/values.yaml
     tenant:
       name: mlops-tenant
       pools:
