@@ -15,7 +15,7 @@ spec:
       version: "3.0.3"
   interval: 1m0s
   values:
-    # See https://raw.githubusercontent.com/jupyterhub/zero-to-jupyterhub-k8s/main/jupyterhub/values.yaml
+    #! See https://raw.githubusercontent.com/jupyterhub/zero-to-jupyterhub-k8s/main/jupyterhub/values.yaml
     proxy:
       service:
         type: "ClusterIP"
