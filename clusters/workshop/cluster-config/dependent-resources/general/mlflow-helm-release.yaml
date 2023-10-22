@@ -36,20 +36,21 @@ spec:
         container: "mlflow"
         storageAccount: "cs2fd2a353d1c2cx431bx9d6"
         accessKey: "EgdacYl1KgPYOP4l6TCXkpO2faK0vA1HkopVfhka9SuZX5fDYESyIHlbZFIUmmeEP0eKTQQ8ozgAckNT3PIWFQ=="
-#---
-#apiVersion: projectcontour.io/v1
-#kind: HTTPProxy
-#metadata:
-#  name: mlflow
-#  namespace: mlflow
-#spec:
-#  virtualhost:
-#    fqdn: mlflow.mlops.tanzu.corby.page
-#    tls:
-#      secretName: contour-tls/tls
-#  routes:
-#    - conditions:
-#        - prefix: /
-#      services:
-#        - name: http
-#          port: 5000
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: mlflow
+  namespace: mlflow
+spec:
+  virtualhost:
+    fqdn: mlflow.mlops.tanzu.corby.page
+    tls:
+      secretName: contour-tls/tls
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: mlflow
+          port: 5000
+
