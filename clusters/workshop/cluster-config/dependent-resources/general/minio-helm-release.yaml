@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minio
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  chart:
+    spec:
+      chart: minio
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+        namespace: tap-install
+      version: "5.0.14"
+  interval: 1m0s
+  values:
+    # See https://raw.githubusercontent.com/minio/minio/master/helm/minio/values.yaml
+    persistence:
+      size: 5Gi
+    rootUser: "root"
+    rootPassword: "R4z7bGIqxMfFDzTx"
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  virtualhost:
+    fqdn: minio.mlops.tanzu.corby.page
+    tls:
+      secretName: contour-tls/tls
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: minio-console
+          port: 9001
