@@ -17,8 +17,8 @@ sops:
             bXJjYlI2T3JZQVhYRjhxQVRETGY4d1UKMujr9qozHCkT8ghcNQbNaDTXt6nIIU6G
             t2Uog0uw3VnKEvNbNPZy2GzDfIBW1+1nxH++wewjdBzZmeAqXgnVjA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-23T00:11:05Z"
-    mac: ENC[AES256_GCM,data:kXPhuabA2JpamkqYVjR3ia3DVQNT0VRUfRn9BQ0V6nbdJMe+l8krfjk/DeLhhSReX229JjyXdJlWYBGfkI21FFSJ+yGhyli7IVkwt5NcloNNuS47OiX5wiZ7uWD3ds8JgN3c1Rthos86eLyCHP7EzDcbGoYvQlmi+uF94+uYsKM=,iv:eDJP+WfcdvwcMUst5tlfwL/jh58d3n7kMHo0AaVsg+s=,tag:Ems9XvwylQIfddGiVGtv7w==,type:str]
+    lastmodified: "2023-10-23T01:47:31Z"
+    mac: ENC[AES256_GCM,data:2mo2EoYx1w6SPhNM9dPbLttIalBvR2wWpfkqDTZ8Xs2C9E/YlGZEWYxf+Bqu7bUI2l4IU1fv2Sd+6OHNYVEqSSkKXGrnn4BaYmpB90R+zXgluoYvCJkTgTkDPWaD6CugbIsh7KBbrecsQhujGJ36i5z+bB0DiOoXUEJmWXnIMhw=,iv:cn/DnmlJCLq4+o8o6ZWKu7dvJuxabb+Zz5qh0GHmsrI=,tag:UBnLDGRGSLgPy5G3u1zWgA==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.8.0
@@ -49,12 +49,21 @@ spec:
                 database: ENC[AES256_GCM,data:IVB2hj64,iv:jq/z78pYYYILSBEh2OOF5JykQpqwExhTO2YA98bp1sk=,tag:FqamcNf+S9JqaFfmid2yXg==,type:str]
                 user: ENC[AES256_GCM,data:ZUltsw==,iv:Jn7jsLot7YPo1BXE7BVGkX7kBrw19HQceBDA1frOLqo=,tag:DKeFgYXdTi14bErKALRGCg==,type:str]
                 password: ENC[AES256_GCM,data:agWUNZVQAlTOf42RRa4MSnonFkJqgbpilb/E3sMDQRI=,iv:A08Qeb0b1n0lN62nzjpKbqj4y1AAw8DXS37TOwHOwjA=,tag:5TGaEol/v5RG2D3ex+eJeA==,type:str]
-        artifactRoot:
-            azureBlob:
-                enabled: ENC[AES256_GCM,data:MHc1gA==,iv:FNfPPmemsneFvpVmIHpNLrc1RQYsFVaDMe9h+ZBMMM8=,tag:kbim4Ira7cjgacVdzD0urg==,type:bool]
-                container: ENC[AES256_GCM,data:ycdFSX0/,iv:HN46cY5iuDekvua3NGSJZbdRYh87ybp6rrAnHXOYq1M=,tag:qcl/V+dq9xtdZtMBFidmaQ==,type:str]
-                storageAccount: ENC[AES256_GCM,data:WxY/C094iRYPb0nHrSiKUWykAibTpTm/,iv:mFmHIQUC6spaGARBErp+zhG7sMEK93TP/vguEdCJRnw=,tag:jUyQDD3bso4KeGr/cAlxmA==,type:str]
-                accessKey: ENC[AES256_GCM,data:zHBvBCpsb11JQM2hiKjyyQWSyxqx9yJDM1fbOjXER104yxwBMtJVUTtJFjWN2Ktrh5VEmK2DnZn/D9jU3hmx2/K06XRF3hdmBUslWE0G7ukv9Dof11LQdA==,iv:axNJgF6o3Ljv6YkCLi6YBzwKQx4vyFmwILm2w7nmv7I=,tag:0LdhtqhoCyqOwgJgnYsZlQ==,type:str]
+        extraEnvVars:
+            - name: ENC[AES256_GCM,data:ncMCi2ku7WBsTMhMyJb0TQ79RskCvw==,iv:bmyduO8IoHjTRqCPVZG2nuhEfjkr1sWe654DQAcu3FU=,tag:ZGKwFS53PZ2G+fuMYOarwg==,type:str]
+              value: ENC[AES256_GCM,data:+w6u8NYm8wGZJL4dw7ARUziikLDxmLU=,iv:AOUwEs06g5rUeN6boxBL0SKruhB6kDQBhx41Kkofug8=,tag:TCb50GvJbGY0x6S3kLVkqw==,type:str]
+        artifactRoot: null
+        s3:
+            enabled: ENC[AES256_GCM,data:W9NkCw==,iv:cGCDlUlwTgqQs4d55SekYrc6hSQimwc2fWGu8PSQGI0=,tag:v5Y+gKLQVqK4fhCrgw/UWw==,type:bool]
+            bucket: ENC[AES256_GCM,data:VzZFMfrL,iv:SIPhCYhx1eBpEDPrHkSQ5NeoSOONiqzx4AKTds1RIMc=,tag:vjbkpB3X8eBYBDS6WvF/4Q==,type:str]
+            awsAccessKeyId: ENC[AES256_GCM,data:AMTX/g==,iv:gfoLSwoIVLb5YWGKM4+vkaugEZ7QcbXqaKytaLjN+Uk=,tag:Igr3RBeDFjqwj5yFlN8BAg==,type:str]
+            awsSecretAccessKey: ENC[AES256_GCM,data:oo6tF7WTBA5WuM9GOpZLjQ==,iv:flmCERUskrb2EdvTSVqUCwdJ88+GqrVt369MJ+oOOQc=,tag:e0zCmAOEEha7glwCqmNf1Q==,type:str]
+            #ENC[AES256_GCM,data:nE3KXzrPOeZd8F81/vU=,iv:BiIz6MR+zf7H9rLw6jGxc9UYuvnkpoclw1FujUTLxlY=,tag:ZG/LYsUgbTTZFJeEVtLeBg==,type:comment]
+            #ENC[AES256_GCM,data:LWRh7a45mj8AXsDxEBS4,iv:BN4HmrH2nXl4jWUiQ2LqGM268I6RwiM6zRhlVzj+yEs=,tag:dKfnND9fWidtMCi9cDpSYQ==,type:comment]
+            #ENC[AES256_GCM,data:oWURVw1h5UG8E6vQ7vD0leAc1Uc3Ng==,iv:PNry8vzoeuggDuicUYK6lVea2tIRU9uIFbQj3YwV0dw=,tag:V/yC+B9BnYuP+pjzMnsSOQ==,type:comment]
+            #ENC[AES256_GCM,data:PHJoseWialKuHe+56g2O6CgWbWD9K5gXlrI=,iv:1s/Xfk+DdcykLYNmrvcQyXV+7Fx/UCfdRUXzBTpNVPs=,tag:b0RJcHgwrFNv9zz/CvM+/Q==,type:comment]
+            #ENC[AES256_GCM,data:xiqpx91dT2RuY6CIj2sGeHavWH1MNMU75MX4tRU6VYPEm6a9lZwyP/WKbfFvT38+vQ==,iv:KhmA10U/Rp4w1RjWZGb7XDLtnSQNn+7pDM8Pdnc3JtY=,tag:mPdi4bDCdZrPhdp2lBXaSQ==,type:comment]
+            #ENC[AES256_GCM,data:JthZnXfQ8CRH0gKkAa8VB4LnLBa/X7t2Fs2dwPnAcvbNV86ZRxLJ+dJJvyXieekDRCo0nSdv1l8ueTJGWr9dU5L1+amW0XLlP4s1omootCZX5Z7bHaFQD82LQg4PNIYQ3IQVVz80atr5P9cz,iv:3iguTBVICLzrZW0dMPsHqSXKuMskLLKZZFxV73LFVEc=,tag:0/UpzfV2T0QmInwj0XHvKA==,type:comment]
 sops:
     kms: []
     gcp_kms: []
@@ -70,8 +79,8 @@ sops:
             bXJjYlI2T3JZQVhYRjhxQVRETGY4d1UKMujr9qozHCkT8ghcNQbNaDTXt6nIIU6G
             t2Uog0uw3VnKEvNbNPZy2GzDfIBW1+1nxH++wewjdBzZmeAqXgnVjA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-23T00:11:05Z"
-    mac: ENC[AES256_GCM,data:kXPhuabA2JpamkqYVjR3ia3DVQNT0VRUfRn9BQ0V6nbdJMe+l8krfjk/DeLhhSReX229JjyXdJlWYBGfkI21FFSJ+yGhyli7IVkwt5NcloNNuS47OiX5wiZ7uWD3ds8JgN3c1Rthos86eLyCHP7EzDcbGoYvQlmi+uF94+uYsKM=,iv:eDJP+WfcdvwcMUst5tlfwL/jh58d3n7kMHo0AaVsg+s=,tag:Ems9XvwylQIfddGiVGtv7w==,type:str]
+    lastmodified: "2023-10-23T01:47:31Z"
+    mac: ENC[AES256_GCM,data:2mo2EoYx1w6SPhNM9dPbLttIalBvR2wWpfkqDTZ8Xs2C9E/YlGZEWYxf+Bqu7bUI2l4IU1fv2Sd+6OHNYVEqSSkKXGrnn4BaYmpB90R+zXgluoYvCJkTgTkDPWaD6CugbIsh7KBbrecsQhujGJ36i5z+bB0DiOoXUEJmWXnIMhw=,iv:cn/DnmlJCLq4+o8o6ZWKu7dvJuxabb+Zz5qh0GHmsrI=,tag:UBnLDGRGSLgPy5G3u1zWgA==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.8.0
@@ -107,8 +116,8 @@ sops:
             bXJjYlI2T3JZQVhYRjhxQVRETGY4d1UKMujr9qozHCkT8ghcNQbNaDTXt6nIIU6G
             t2Uog0uw3VnKEvNbNPZy2GzDfIBW1+1nxH++wewjdBzZmeAqXgnVjA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-23T00:11:05Z"
-    mac: ENC[AES256_GCM,data:kXPhuabA2JpamkqYVjR3ia3DVQNT0VRUfRn9BQ0V6nbdJMe+l8krfjk/DeLhhSReX229JjyXdJlWYBGfkI21FFSJ+yGhyli7IVkwt5NcloNNuS47OiX5wiZ7uWD3ds8JgN3c1Rthos86eLyCHP7EzDcbGoYvQlmi+uF94+uYsKM=,iv:eDJP+WfcdvwcMUst5tlfwL/jh58d3n7kMHo0AaVsg+s=,tag:Ems9XvwylQIfddGiVGtv7w==,type:str]
+    lastmodified: "2023-10-23T01:47:31Z"
+    mac: ENC[AES256_GCM,data:2mo2EoYx1w6SPhNM9dPbLttIalBvR2wWpfkqDTZ8Xs2C9E/YlGZEWYxf+Bqu7bUI2l4IU1fv2Sd+6OHNYVEqSSkKXGrnn4BaYmpB90R+zXgluoYvCJkTgTkDPWaD6CugbIsh7KBbrecsQhujGJ36i5z+bB0DiOoXUEJmWXnIMhw=,iv:cn/DnmlJCLq4+o8o6ZWKu7dvJuxabb+Zz5qh0GHmsrI=,tag:UBnLDGRGSLgPy5G3u1zWgA==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.8.0
