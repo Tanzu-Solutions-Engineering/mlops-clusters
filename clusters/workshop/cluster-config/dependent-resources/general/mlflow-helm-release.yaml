@@ -30,8 +30,8 @@ spec:
         user: root
         password: 4en68agocp3g4atodwxf9k2p1bavlzlq
     extraEnvVars:
-      - name: MLFLOW_S3_ENDPOINT_URL
-        value: http://minio.minio:9000
+      - name: "MLFLOW_S3_ENDPOINT_URL"
+        value: "http://minio.minio:9000"
     artifactRoot:
       s3:
         enabled: true
