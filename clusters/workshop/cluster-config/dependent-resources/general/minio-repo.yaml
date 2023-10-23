@@ -8,4 +8,4 @@ metadata:
     kapp.k14s.io/change-group: minio-helm-repo
 spec:
   interval: 5m0s
-  url: https://operator.min.io/
+  url: https://charts.min.io/
