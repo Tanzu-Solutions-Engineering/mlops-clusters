@@ -25,6 +25,10 @@ spec:
       size: 5Gi
     rootUser: "root"
     rootPassword: "R4z7bGIqxMfFDzTx"
+    replicas: 2
+    resources:
+      requests:
+        memory: 1Gi
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
